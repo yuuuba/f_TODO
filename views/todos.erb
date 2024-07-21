@@ -1,0 +1,16 @@
+<form action="/create_todo" method="post">
+  <label for="title">やること </label>
+  <input id="title" name="title" type="text" value="foo">
+  <input type="submit" value="追加">
+</form>
+<h1>やることリスト</h1>
+
+
+<% @todos.each do |todo| %>
+  <form action="/delete_todo/<%= todo.id %>" method="post">
+    <%= todo.title %>
+    <input type="hidden" name="id" value="<%= todo.id %>">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit">削除</button>
+  </form>
+<% end %>
