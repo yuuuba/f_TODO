@@ -32,8 +32,8 @@ post '/create_todo' do
   redirect '/'
 end
 
-# うごいたらいいなぁ
-delete '/delete_todo/1' do
+# うごいた！
+delete '/delete_todo/:id' do
   # enable :method_override
   # Todo.destroy(title: params["title"])
   todo = Todo.find(params[:id])
