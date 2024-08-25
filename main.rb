@@ -9,15 +9,11 @@ set :bind, '0.0.0.0'
 # うごく！
 get '/' do
   # 'やることリスト'
-
   # book = Book.new(title: 'たのしい Ruby', author: 'Jhon Doe', price: 1_000)
   # book.save!
-
   # Book.create(title: 'チェリー本', author: 'itou', price: 3_000)
 
-
   @todos = Todo.all
-
   erb :todos
 end
 
