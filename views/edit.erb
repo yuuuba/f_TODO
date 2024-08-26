@@ -1,0 +1,8 @@
+<h1><%= @todo.title %>を編集</h1>
+
+<form action="/update/<%= @todo.id %>" method="post">
+  <label for="title">タイトル</label><br>
+  <input type="text" name="title" value="<%= @todo.title %>">
+  <button type="submit">保存する</button><br>
+  <a href='/'>一覧に戻る</a>
+</form>

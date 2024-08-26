@@ -8,7 +8,9 @@
 
 <% @todos.each do |todo| %>
   <form action="/delete_todo/<%= todo.id %>" method="post">
+    <%= todo.id %>
     <%= todo.title %>
+    <a href='/edit/<%= todo.id %>'>編集</a>
     <input type="hidden" name="id" value="<%= todo.id %>">
     <input type="hidden" name="_method" value="delete">
     <button type="submit">削除</button>

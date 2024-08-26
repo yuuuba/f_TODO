@@ -6,7 +6,7 @@ require_relative 'config/db'
 
 set :bind, '0.0.0.0'
 
-# うごく！
+
 get '/' do
   # 'やることリスト'
   # book = Book.new(title: 'たのしい Ruby', author: 'Jhon Doe', price: 1_000)
@@ -17,7 +17,7 @@ get '/' do
   erb :todos
 end
 
-# うごく！
+
 post '/create_todo' do
   # pp params
   Todo.create(title: params["title"])
@@ -28,7 +28,20 @@ post '/create_todo' do
   redirect '/'
 end
 
-# うごいた！
+get '/edit/:id' do
+  @todo = Todo.find(params[:id])
+  erb :edit
+end
+
+post '/update/:id' do
+  todo = Todo.find(params['id'])
+
+  todo.title = params['title']
+  todo.save
+
+  redirect "/"
+end
+
 delete '/delete_todo/:id' do
   # enable :method_override
   # Todo.destroy(title: params["title"])
