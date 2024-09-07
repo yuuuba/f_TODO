@@ -1,6 +1,8 @@
-<form action="/create_todo" method="post">
+<form action="/create_todo" method="post" enctype="multipart/form-data">
   <label for="title">やること </label>
   <input id="title" name="title" type="text" value="foo">
+  <label for="image">画像を追加</label>
+  <input id="image" name="image" type="file">
   <input type="submit" value="追加">
 </form>
 <h1>やることリスト</h1>
@@ -10,6 +12,10 @@
   <form action="/delete_todo/<%= todo.id %>" method="post">
     <%= todo.id %>
     <%= todo.title %>
+    <% if todo.image_data %>
+      <br>
+      <img src="data:image/jpeg;base64,<%= Base64.encode64(todo.image_data) %>" alt="TODO Image" style="max-width:200px; max-height:200px;">
+    <% end %>
     <a href='/edit/<%= todo.id %>'>編集</a>
     <input type="hidden" name="id" value="<%= todo.id %>">
     <input type="hidden" name="_method" value="delete">

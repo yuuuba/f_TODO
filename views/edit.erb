@@ -1,8 +1,23 @@
 <h1><%= @todo.title %>を編集</h1>
 
-<form action="/update/<%= @todo.id %>" method="post">
+<form action="/update/<%= @todo.id %>" method="post" enctype="multipart/form-data">
   <label for="title">タイトル</label><br>
   <input type="text" name="title" value="<%= @todo.title %>">
+
+  <label for="image">画像</label><br>
+  <input id="image" name="image" type="file"><br>
+
+  <% if @todo.image_data %>
+    <img src="data:image/jpeg;base64,<%= Base64.encode64(@todo.image_data) %>" alt="TODO Image" style="max-width:200px; max-height:200px;"><br>
+
+    <!-- ネストされたフォームを別のボタンに置き換える -->
+    <button type="button" onclick="document.getElementById('delete-image-form').submit();">画像を削除</button>
+  <% end %><br>
+
   <button type="submit">保存する</button><br>
   <a href='/'>一覧に戻る</a>
+</form>
+
+<!-- 削除用のフォームは別に作成 -->
+<form id="delete-image-form" action="/delete_image/<%= @todo.id %>" method="post" style="display:none;">
 </form>

@@ -10,6 +10,14 @@ ActiveRecord::Schema.define do
   unless ActiveRecord::Base.connection.tables.include?('todos')
     create_table :todos do |table|
       table.column :title,    :string
+      table.column :image_data,    :binary
+    end
+  else
+    # 既存のテーブルにカラムを追加
+    change_table :todos do |table|
+      unless column_exists?(:todos, :image_data)
+        table.column :image_data, :binary
+      end
     end
   end
 end
