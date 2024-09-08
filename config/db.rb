@@ -20,4 +20,11 @@ ActiveRecord::Schema.define do
       end
     end
   end
+
+  unless ActiveRecord::Base.connection.tables.include?('users')
+    create_table :users do |table|
+      table.column :username, :string
+      table.column :password_digest, :string
+    end
+  end
 end

@@ -5,8 +5,22 @@
   <input id="image" name="image" type="file">
   <input type="submit" value="追加">
 </form>
-<h1>やることリスト</h1>
 
+<% if session[:user_id] %>
+  <form action="/logout" method="get" style="display:inline;">
+    <button type="submit">ログアウト</button>
+  </form>
+<% else %>
+  <form action="/login" method="get" style="display:inline;">
+    <button type="submit">ログイン</button>
+  </form>
+
+  <form action="/signup" method="get" style="display:inline;">
+    <button type="submit">新規登録</button>
+  </form>
+<% end %>
+
+<h1>やることリスト</h1>
 
 <% @todos.each do |todo| %>
   <form action="/delete_todo/<%= todo.id %>" method="post">
